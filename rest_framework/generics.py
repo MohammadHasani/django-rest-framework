@@ -188,6 +188,7 @@ class CreateAPIView(mixins.CreateModelMixin,
     """
     Concrete view for creating a model instance.
     """
+
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
@@ -197,6 +198,7 @@ class ListAPIView(mixins.ListModelMixin,
     """
     Concrete view for listing a queryset.
     """
+
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
@@ -206,6 +208,7 @@ class RetrieveAPIView(mixins.RetrieveModelMixin,
     """
     Concrete view for retrieving a model instance.
     """
+
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
@@ -215,6 +218,7 @@ class DestroyAPIView(mixins.DestroyModelMixin,
     """
     Concrete view for deleting a model instance.
     """
+
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
@@ -224,8 +228,20 @@ class UpdateAPIView(mixins.UpdateModelMixin,
     """
     Concrete view for updating a model instance.
     """
+
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+
+class PartialUpdateAPIView(mixins.RetrieveModelMixin,
+                           mixins.UpdateModelMixin,
+                           GenericAPIView):
+    """
+    Concrete view just for partial update.
+    """
 
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
@@ -237,6 +253,7 @@ class ListCreateAPIView(mixins.ListModelMixin,
     """
     Concrete view for listing a queryset or creating a model instance.
     """
+
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
@@ -250,6 +267,7 @@ class RetrieveUpdateAPIView(mixins.RetrieveModelMixin,
     """
     Concrete view for retrieving, updating a model instance.
     """
+
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
@@ -266,6 +284,7 @@ class RetrieveDestroyAPIView(mixins.RetrieveModelMixin,
     """
     Concrete view for retrieving or deleting a model instance.
     """
+
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
@@ -280,6 +299,7 @@ class RetrieveUpdateDestroyAPIView(mixins.RetrieveModelMixin,
     """
     Concrete view for retrieving, updating or deleting a model instance.
     """
+
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
